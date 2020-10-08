@@ -33,7 +33,7 @@ class AdditionalShippingCostPostcode extends Module
     private $message = '';
 
     protected $config_form = false;
-    protected $support_url = 'https://addons.prestashop.com/contact-form.php?id_product='; // TODO
+    protected $support_url = 'https://addons.prestashop.com/fr/contactez-nous?id_product=50128';
 
     public function __construct()
     {
@@ -43,7 +43,7 @@ class AdditionalShippingCostPostcode extends Module
         $this->author = 'Mathieu Thollet';
         $this->need_instance = 0;
         $this->bootstrap = true;
-        $this->module_key = ''; // TODO
+        $this->module_key = '4b5c1a2354df4d4ccd6a0df0b28605d3';
 
         parent::__construct();
 
@@ -74,8 +74,7 @@ class AdditionalShippingCostPostcode extends Module
         $this->context->smarty->assign('support_url', $this->support_url);
         $output = $this->message .
             $this->renderConfigForm() .
-            $this->context->smarty->fetch($this->local_path . 'views/templates/admin/support.tpl')
-        ;
+            $this->context->smarty->fetch($this->local_path . 'views/templates/admin/support.tpl');
         return $output;
     }
 

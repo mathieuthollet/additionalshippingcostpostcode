@@ -15,9 +15,9 @@ Choose the file "additionalshippingcostpostcode.zip" and click on "Upload this m
 * Choose if the price calculation is with or without taxes
 * Choose if you want to skip additional shipping cost for free shipping carriers
 
-# Support
-If you have any question or bug report, or suggestions to improve my module, contact me : https://addons.prestashop.com/contact-form.php?id_product=TODO  
+## Support
+If you have any question or bug report, or suggestions to improve my module, contact me.  
 I will do my best to help you with your module.
 
-# Rating
+## Rating
 If you found this module was usefull, please leave a rating on Prestashop Addons :)
