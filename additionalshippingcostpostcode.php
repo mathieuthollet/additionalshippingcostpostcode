@@ -39,7 +39,7 @@ class AdditionalShippingCostPostcode extends Module
     {
         $this->name = 'additionalshippingcostpostcode';
         $this->tab = 'checkout';
-        $this->version = '1.0.0';
+        $this->version = '1.0.1';
         $this->author = 'Mathieu Thollet';
         $this->need_instance = 0;
         $this->bootstrap = true;
@@ -189,7 +189,7 @@ class AdditionalShippingCostPostcode extends Module
                     $message .= $this->l('2 values needed (postal code and price)') . ', ' . count($rowArray) . ' ' . $this->l('given.');
                     $this->setErrorMessage($message);
                     $error = true;
-                } else if (!is_numeric($rowArray[1])) {
+                } elseif (!is_numeric($rowArray[1])) {
                     $message = $this->l('Incorrect format at row') . ' ' . $iRow . ' : ';
                     $message .= $this->l('Price should be numeric');
                     $this->setErrorMessage($message);
