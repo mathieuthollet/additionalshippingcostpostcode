@@ -41,7 +41,7 @@ class Cart extends CartCore
     public function getPackageShippingCost($id_carrier = null, $use_tax = true, Country $default_country = null, $product_list = null, $id_zone = null)
     {
         $shippingCost = parent::getPackageShippingCost($id_carrier, $use_tax, $default_country, $product_list, $id_zone);
-        if (!Module::isEnabled('additionalshippingcostpostcode')) {
+        if (Module::isEnabled('additionalshippingcostpostcode')) {
             if ($this->id_address_delivery != 0) {
                 if (null === $id_carrier && !empty($this->id_carrier)) {
                     $id_carrier = (int)$this->id_carrier;
