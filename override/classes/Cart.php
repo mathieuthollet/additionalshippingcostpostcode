@@ -41,26 +41,28 @@ class Cart extends CartCore
     public function getPackageShippingCost($id_carrier = null, $use_tax = true, Country $default_country = null, $product_list = null, $id_zone = null)
     {
         $shippingCost = parent::getPackageShippingCost($id_carrier, $use_tax, $default_country, $product_list, $id_zone);
-        if ($this->id_address_delivery != 0) {
-            if (null === $id_carrier && !empty($this->id_carrier)) {
-                $id_carrier = (int)$this->id_carrier;
-            }
-            if ($id_carrier) {
-                $carrier = self::$_carriers[$id_carrier];
-                $rules = json_decode(Configuration::get('ADDITIONALSHIPPINGCOSTPOSTCODE_RULES'));
-                $skipForFreeShipping = (bool)Configuration::get('ADDITIONALSHIPPINGCOSTPOSTCODE_SKIPFORFREESHIPPING');
-                $address = new Address($this->id_address_delivery);
-                $additionalShippingCost = 0;
-                if (is_array($rules)) {
-                    foreach ($rules as $rule) {
-                        if (fnmatch($rule->postcode, $address->postcode)) {
-                            $currency = Currency::getCurrency((int)$this->id_currency);
-                            $additionalShippingCost = Tools::convertPrice((float)$rule->additionalShippingCost, $currency);
+        if (!Module::isEnabled('additionalshippingcostpostcode')) {
+            if ($this->id_address_delivery != 0) {
+                if (null === $id_carrier && !empty($this->id_carrier)) {
+                    $id_carrier = (int)$this->id_carrier;
+                }
+                if ($id_carrier) {
+                    $carrier = self::$_carriers[$id_carrier];
+                    $rules = json_decode(Configuration::get('ADDITIONALSHIPPINGCOSTPOSTCODE_RULES'));
+                    $skipForFreeShipping = (bool)Configuration::get('ADDITIONALSHIPPINGCOSTPOSTCODE_SKIPFORFREESHIPPING');
+                    $address = new Address($this->id_address_delivery);
+                    $additionalShippingCost = 0;
+                    if (is_array($rules)) {
+                        foreach ($rules as $rule) {
+                            if (fnmatch($rule->postcode, $address->postcode)) {
+                                $currency = Currency::getCurrency((int)$this->id_currency);
+                                $additionalShippingCost = Tools::convertPrice((float)$rule->additionalShippingCost, $currency);
+                            }
                         }
                     }
-                }
-                if (!$carrier->is_free || !$skipForFreeShipping) {
-                    $shippingCost += $additionalShippingCost;
+                    if (!$carrier->is_free || !$skipForFreeShipping) {
+                        $shippingCost += $additionalShippingCost;
+                    }
                 }
             }
         }
