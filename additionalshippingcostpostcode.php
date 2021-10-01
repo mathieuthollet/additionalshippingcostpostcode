@@ -39,8 +39,8 @@ class AdditionalShippingCostPostcode extends Module
     {
         $this->name = 'additionalshippingcostpostcode';
         $this->tab = 'checkout';
-        $this->version = '1.0.2';
-        $this->author = 'Mathieu Thollet';
+        $this->version = '1.0.3';
+        $this->author = 'AWebVision';
         $this->need_instance = 0;
         $this->bootstrap = true;
         $this->module_key = '4b5c1a2354df4d4ccd6a0df0b28605d3';
