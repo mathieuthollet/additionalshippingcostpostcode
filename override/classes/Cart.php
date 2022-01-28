@@ -1,6 +1,6 @@
 <?php
 /**
- * 2007-2021 PrestaShop
+ * 2007-2022 PrestaShop
  *
  * NOTICE OF LICENSE
  *
@@ -19,7 +19,7 @@
  * needs please refer to http://www.prestashop.com for more information.
  *
  * @author    PrestaShop SA <contact@prestashop.com>
- * @copyright 2007-2021 PrestaShop SA
+ * @copyright 2007-2022 PrestaShop SA
  * @license   http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
  *  International Registered Trademark & Property of PrestaShop SA
  */
@@ -35,12 +35,13 @@ class Cart extends CartCore
      * @param array|null $product_list list of product concerned by the shipping.
      *                                 If null, all the product of the cart are used to calculate the shipping cost
      * @param int|null $id_zone Zone ID
+     * @param bool $keepOrderPrices When true use the Order saved prices instead of the most recent ones from catalog (if Order exists)
      *
      * @return float|bool Shipping total, false if not possible to ship with the given carrier
      */
-    public function getPackageShippingCost($id_carrier = null, $use_tax = true, Country $default_country = null, $product_list = null, $id_zone = null)
+    public function getPackageShippingCost($id_carrier = null, $use_tax = true, Country $default_country = null, $product_list = null, $id_zone = null, bool $keepOrderPrices = false)
     {
-        $shippingCost = parent::getPackageShippingCost($id_carrier, $use_tax, $default_country, $product_list, $id_zone);
+        $shippingCost = parent::getPackageShippingCost($id_carrier, $use_tax, $default_country, $product_list, $id_zone, $keepOrderPrices);
         if (Module::isEnabled('additionalshippingcostpostcode')) {
             if ($this->id_address_delivery != 0) {
                 if (null === $id_carrier && !empty($this->id_carrier)) {
